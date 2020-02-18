@@ -17,21 +17,13 @@ Consider this conversation:
 > User:  yeah <br/>
 > CoffeeBot:  Great! Your mocha will be available for pickup soon. Thanks for using CoffeeBot!
 
-Let's build this voice bot, an Android App that talks to you using Amazon Polly and Amazon Lex.
-You can use the AWS Console for your account to start testing the bot, but you can also build a mobile app using:
-- Android development environment ([download](https://developer.android.com/sdk))
-- To test voice (you can use the Android Emulator for text)
-	- An Android device
-	- A USB cable for USB debugging ([more info for Amazon Emulators](https://developer.android.com/studio/run/emulator))
-- You can also use the AWS ([Device Farm](https://docs.aws.amazon.com/devicefarm/latest/developerguide/welcome.html)): Device Farm is an app testing service that you can use to test and interact with your Android, iOS, and web apps on real, physical phones and tablets that are hosted by Amazon Web Services (AWS).
+Let's build this slack bot, direct messaging between you and slack bot using Amazon Lex. 
 
-For simplicity, we shall stick with the Android Emulator App (If we ever get to this optional part).
-
-First, we'll create the Amazon Lex bot.  Then, we'll add some Lambda Functions to bring it to life.  Finally, we'll put it all together with Amplify and the Lex Android SDK (Optional).
+First, we'll create the Amazon Lex bot. Then, we'll add some Lambda Functions to bring it to life (Optional). Integrate Amazon Lex bot with slack bot by creating a slack app in your preferred slack channel (Optional). Finally, we'll put it all together with Amplify and the Lex Android SDK (Optional).
 
 ## Amazon Lex bot
 #### 1. Create bot
-1. From the Amazon Lex console, create a Custom bot with these settings (you can see these in the "Settings" tab later)
+1. From the Amazon Lex console (preferably Chrome browser), create a Custom bot with these settings (you can see these in the "Settings" tab later)
     - Bot name:  `CoffeeBot`
 		- To work independently in a shared environment, use your initials in the name (e.g., `CoffeeBotXXX`)
     - Output voice:  `Salli`
@@ -99,6 +91,12 @@ Hang-up phrase: (one phrase) Sorry, I could not understand. Goodbye.
 Build the app by clicking the build button at the top right. To test the bot with some of the utterances, expand the Test Chatbot dialog at the top right corner of the Amazon Lex Console. For example, if you say May I have a chai? does Lex correctly map chai to the BeverageType slot?
   For example, if you say `May I have a chai?`, does Lex correctly map `chai` to the `BeverageType` slot?
 
+#### 7. Deploying Amazon Lex Bots
+Do the following to publish a version of a bot you created for this exercise:
+In the Amazon Lex console, choose `CoffeeBot` you created. Choose Publish. On the Publish botname wizard, specify the alias `BETA`, and then choose Publish.
+Verify that the Amazon Lex console shows the new version next to the bot name. Now that you have a working bot with published version and an alias, you can deploy the bot (integrate the bot with Slack app).
+
+
 ## Lambda Function
 1. Create the `cafeOrderCoffee` function by saving `cafeOrderCoffee_lambda.js` as a Node.js 8.10 function
 	- To work independently in a shared environment, use your initials in the function name (e.g., `cafeOrderCoffeeXXX`)
@@ -120,7 +118,25 @@ b. Modify the `cafeOrderBeverageIntent` Intent
 c. Build the bot
 d. Test using the Amazon Lex Console; do you see any responses when you ask `May I have a mocha?`
 
+## Slack App integration (Optional)
+Let's create a Slack application on the Slack API Console, use bot events to slack with Amazon Lex.
+- Create slack application (https://docs.aws.amazon.com/lex/latest/dg/slack-bot-assoc-create-app.html)
+- Integrate the slack application with the Amazon lex (https://docs.aws.amazon.com/lex/latest/dg/slack-bot-assoc-create-assoc.html)
+- Complete slack integration (https://docs.aws.amazon.com/lex/latest/dg/slack-bot-back-in-slack-console.html)
+Test the integration, engage in a chat with your slack application that is linked to Amazon Lex bot.
+
+
 ## Android App (Optional)
+Let's build this voice bot, an Android App that talks to you using Amazon Polly and Amazon Lex.
+You can use the AWS Console for your account to start testing the bot, but you can also build a mobile app using:
+- Android development environment ([download](https://developer.android.com/sdk))
+- To test voice (you can use the Android Emulator for text)
+	- An Android device
+	- A USB cable for USB debugging ([more info for Amazon Emulators](https://developer.android.com/studio/run/emulator))
+- You can also use the AWS ([Device Farm](https://docs.aws.amazon.com/devicefarm/latest/developerguide/welcome.html)): Device Farm is an app testing service that you can use to test and interact with your Android, iOS, and web apps on real, physical phones and tablets that are hosted by Amazon Web Services (AWS).
+
+For simplicity, we shall stick with the Android Emulator App (If we ever get to this optional part).
+
 Create a Mobile Application using Amplify. AWS Amplify is a development platform for building secure, scalable mobile and web applications. It makes it easy for you to authenticate users, securely store data and user metadata, authorize selective access to data, integrate machine learning, analyze application metrics, and execute server-side code. Sign into the AWS Amplify console to get started. 
-## AWS Amplify
+## AWS Amplify (Optional)
 When you're ready, try out [AWS Amplify](https://aws-amplify.github.io/docs/js/interactions) for bringing your chatbot to a mobile or web environment.
